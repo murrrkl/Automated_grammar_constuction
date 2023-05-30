@@ -1,5 +1,10 @@
 <body>
-    <div style = "display: flex; flex-direction: column;  height: 100vh; align-items: center; justify-content: center;">
+    <header>
+        <div class="header">
+            <a class = "menu" href="index.php">Главная</a>
+        </div>
+    </header>
+    <div style = "display: flex; flex-direction: column;  height: 100vh; align-items: center; margin-top: 200px;">
         <a class="btn" href="special.php">
             Специалист
         </a>
@@ -11,6 +16,31 @@
 </body>
 
 <style>
+    * {
+
+        margin: 0;
+        padding:0;
+    }
+
+    .header{
+        background-color:rgba(255, 255, 255, 0.7);
+        padding: 1.3em 1em; /* поля вокруг текста */
+
+
+    }
+
+    .menu {
+        text-transform: uppercase;
+        padding: 0.5em 1em;
+        color: gray;
+        text-decoration: none;
+        transition: 0.3s;
+        letter-spacing: 2px;
+    }
+    .menu:hover {
+        color: purple;
+        cursor: pointer;
+    }
 
     @font-face {
         font-family: "Evolventa-Regular";
@@ -19,6 +49,7 @@
 
     body {
         background-color: Lavender;
+        font-family: Evolventa-Regular;
     }
 
     .btn {
@@ -33,12 +64,12 @@
         line-height: 45px;
         border-radius: 45px;
         margin-bottom: 20px;
-        font-family: Evolventa-Regular;
         padding:5px 32px;
         text-align: center;
         letter-spacing: 2px;
         font-size: 18px;
         color: black;
+        font-family: "Evolventa-Regular";
     }
 
     .btn:hover {

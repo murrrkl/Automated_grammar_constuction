@@ -1,10 +1,55 @@
+<header>
+    <div class="header">
+        <a class = "menu" href="index.php">Главная</a>
+        <a class = "menu" href="special.php" style="margin-left: 30px;">Меню специалиста</a>
+    </div>
+</header>
+
+<style>
+
+    * {
+
+        margin: 0;
+        padding:0;
+    }
+
+    .header{
+        background-color:rgba(255, 255, 255, 0.7);
+        padding: 1.3em 1em; /* поля вокруг текста */
+
+
+    }
+
+    .menu {
+        text-transform: uppercase;
+        padding: 0.5em 1em;
+        color: gray;
+        text-decoration: none;
+        transition: 0.3s;
+        letter-spacing: 2px;
+    }
+
+    .menu:hover {
+        color: purple;
+        cursor: pointer;
+    }
+</style>
+
 <?php
 
-$host = '127.0.0.1';
-$username = 'kiko';
+$username = 'root';
 $pass = '12345678K';
 $db = 'Situations';
-//$conn = new PDO("mysql:host=$host;dbname=$db", $username, $pass);
+
+try {
+    // подключаемся к серверу
+    $conn = new PDO("mysql:host=localhost; charset=utf8; dbname=$db", $username, $pass);
+    //echo "Database connection established";
+}
+catch (PDOException $e) {
+    echo "Connection failed: " . $e->getMessage();
+}
+
 
 if (!empty($_POST)) {
     if (trim($_POST['name'] === '')) {
@@ -14,14 +59,17 @@ if (!empty($_POST)) {
     } else {
         $name = $_POST['name'];
         $description = $_POST['description'];
+        $sql = $conn->prepare("INSERT INTO mySituations(`name`, `description`) VALUES (?, ?);");
+        $dbg = $sql->execute([$name, $description]);
     }
 }
-?>
 
+?>
+<meta charset="utf-8" />
 <body>
-<div style = "display: flex; flex-direction: column;  height: 100vh; align-items: center; justify-content: center;">
+<div style = "display: flex; flex-direction: column;  height: 100vh; margin-top: 100px;">
     <form method="POST">
-        <div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+        <div style="display: flex; align-items: center; flex-direction: column;">
             <input name="name" type="text" placeholder="Введите название ситуации">
             <textarea name="description" type="text" placeholder="Введите обоснование ситуации..."></textarea>
         </div>
@@ -39,6 +87,7 @@ if (!empty($_POST)) {
     }
 
     body {
+        font-family: "Evolventa-Regular";
         background-color: Lavender;
     }
 
@@ -46,7 +95,6 @@ if (!empty($_POST)) {
         width: 630px;
         height: 50px;
         font-size: 13px;
-        font-family: "Evolventa-Regular";
         background: white;
         border-radius: 25px;
         border: none;
@@ -58,7 +106,6 @@ if (!empty($_POST)) {
         width: 630px;
         height: 300px;
         font-size: 13px;
-        font-family: "Evolventa-Regular";
         background: white;
         border-radius: 25px;
         border: none;
@@ -69,22 +116,14 @@ if (!empty($_POST)) {
         margin-bottom: 20px;
     }
 
-    h1 {
-        font-family: "Evolventa-Regular";
-        width: 100%;
-        text-align: center;
-        color: DarkSlateBlue;
-    }
-
     button {
         width: 500px;
         height: 50px;
         background-color: MediumPurple;
-        font-family: "Evolventa-Regular";
         border: none;
         border-radius: 25px;
         font-size: 18px;
-
+        font-family: "Evolventa-Regular";
     }
 
 
