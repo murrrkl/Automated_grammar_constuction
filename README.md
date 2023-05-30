@@ -15,6 +15,7 @@ sudo chmod 777 /var/run/docker.sock
 # MySQL
 
 CREATE DATABASE Situations CHARACTER SET utf8;
+
 CREATE TABLE mySituations(name varchar(20) NOT NULL,description text NOT NULL) CHARACTER SET=utf8;
 
 # Установка PDO
