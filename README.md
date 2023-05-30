@@ -10,7 +10,7 @@ Tomita-Docker: https://hub.docker.com/r/nlpub/tomita
 
 # Выдача прав доступа
 
-sudo chmod 777 /var/run/docker.sock 
+`sudo chmod 777 /var/run/docker.sock` 
 
 # MySQL
 
