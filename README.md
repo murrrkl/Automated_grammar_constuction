@@ -24,6 +24,8 @@ CREATE TABLE mySituations(name varchar(20) NOT NULL,description text NOT NULL) C
 
 `
 sudo apt update
+
 sudo apt install php7.2-mysql
+
 sudo apt-get install pdo-mysql
 `
