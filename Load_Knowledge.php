@@ -1,7 +1,5 @@
 <?php
 
-
-
 if (isset($_POST['upload_btn'])) {
     if (isset($_FILES['gramma']) & $_FILES['gramma']['error'] === UPLOAD_ERR_OK) {
         if (isset($_FILES['fact']) & $_FILES['fact']['error'] === UPLOAD_ERR_OK) {
@@ -29,18 +27,17 @@ if (isset($_POST['upload_btn'])) {
                 }
 
             } else {
-                echo '<script>alert("Файл с граматикой имеет неверный формат!")</script>';
+                echo '<script>alert("Файл с грамматикой имеет неверный формат!")</script>';
             }
 
         } else {
             echo '<script>alert("Файл с фактами не выбран!")</script>';
         }
     } else {
-        echo '<script>alert("Файл с граматикой не выбран!")</script>';
+        echo '<script>alert("Файл с грамматикой не выбран!")</script>';
     }
 
 }
-
 ?>
 
 <header>
@@ -87,8 +84,6 @@ if (isset($_POST['upload_btn'])) {
     .header{
         background-color:rgba(255, 255, 255, 0.7);
         padding: 1.3em 1em; /* поля вокруг текста */
-
-
     }
 
     h1 {

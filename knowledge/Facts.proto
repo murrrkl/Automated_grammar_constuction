@@ -4,68 +4,25 @@ import "facttypes_base.proto";
 
 message Situation_first:NFactType.TFact
 {
-//обязательное поле факта
-    required string Pol = 1;
-    required string Med = 2;
-    required string Ves = 3 ;
-    optional string Age = 4;
+// необязательное поле факта
+    optional string Pol = 1; // Пол
+    optional string Med = 2; // Мед обследование
+    optional string Ves = 3 ; // Вес
+    optional string Age = 4; // Возраст
+    optional string Fines = 5; // Штраф
+    optional string Kvadrocopter = 6; // Использоване квадракоптера
+    optional string Pictures = 7; // Съёмка
+    optional string Reaction = 8; // Реакция людей
+    optional string CultureAction = 9; // Неприличное поведение
+    optional string Location = 10; // Локация
+    optional string Garbage = 11; // Мусор
+    optional string Urn = 12; // Урна
+    optional string Tips = 13; // Чаевые
+    optional string FoodAction = 14; // Заслуги заведения
+    optional string Tattoo = 15; // Тату
+    optional string getNameAction = 16; // Дать имя
+    optional string Name = 17; // Имя
+    optional string Kinship = 18; // Родство
+    optional string PersonalSpace = 19; // Личное пространство
+    optional string ChopsticksFoodAction = 20; // Дествия с едой
 }
-
-message Situation_second:NFactType.TFact
-{
-    required string Fines = 1;
-    required string Kvadrocopter = 2;
-    //необязательное поле факта
-    optional string Pictures = 3;
-}
-
-message Situation_third:NFactType.TFact
-{
-    optional string Location = 1;
-    required string Action = 2;
-    required string Reaction = 3;
-}
-
-message Situation_fourth:NFactType.TFact
-{
-    optional string Location = 1;
-    required string Garbage = 2;
-    required string Urn = 3;
-}
-
-message Situation_fifth:NFactType.TFact
-{
-    required string Location = 1;
-    required string Tips = 2;
-    optional string Action = 3;
-    required string Reaction = 4;
-}
-
-message Situation_sixth:NFactType.TFact
-{
-    required string Location = 1;
-    required string Tattoo = 2;
-    required string Reaction = 3;
-}
-
-message Situation_seventh:NFactType.TFact
-{
-    required string Action = 1;
-    required string Kinship = 2;
-    required string Name = 3;
-    required string Result = 4;
-}
-
-message Situation_eighth:NFactType.TFact
-{
-    required string Action = 1;
-    required string Location = 2;
-    required string Reaction = 3;
-}
-
-message Situation_ninth:NFactType.TFact
-{
-    required string Action = 1;
-    required string Reaction = 2;
-}
-

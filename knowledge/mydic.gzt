@@ -4,68 +4,13 @@ import "base.proto";           // подключаем описания protobuf
 import "articles_base.proto";  // Файлы base.proto и articles_base.proto встроены в компилятор.
                                // Их необходимо включать в начало любого gzt-словаря.
                                
-import "fact_types.proto";
+import "Facts.proto";
 
 import "kwtypes.proto";
 import "pol.gzt";
 
-
 // статья с нашей грамматикой:
 TAuxDicArticle "Ситуация_1"
 {
-    key = { "tomita:Situation_first.cxx" type=CUSTOM }
+    key = { "tomita:Situations.cxx" type=CUSTOM }
 }
-
-// статья с нашей грамматикой:
-TAuxDicArticle "Ситуация_2"
-{
-    key = { "tomita:Situation_second.cxx" type=CUSTOM }
-}
-
-// статья с нашей грамматикой:
-TAuxDicArticle "Ситуация_3"
-{
-    key = { "tomita:Situation_third.cxx" type=CUSTOM }
-}
-
-// статья с нашей грамматикой:
-TAuxDicArticle "Ситуация_4"
-{
-    key = { "tomita:Situation_fourth.cxx" type=CUSTOM }
-}
-
-// статья с нашей грамматикой:
-TAuxDicArticle "Ситуация_5"
-{
-    key = { "tomita:Situation_fifth.cxx" type=CUSTOM }
-}
-
-// статья с нашей грамматикой:
-TAuxDicArticle "Ситуация_6"
-{
-    key = { "tomita:Situation_sixth.cxx" type=CUSTOM }
-}
-
-// статья с нашей грамматикой:
-TAuxDicArticle "Ситуация_7"
-{
-    key = { "tomita:Situation_seventh.cxx" type=CUSTOM }
-}
-
-// статья с нашей грамматикой:
-TAuxDicArticle "Ситуация_8"
-{
-    key = { "tomita:Situation_eighth.cxx" type=CUSTOM }
-}
-
-// статья с нашей грамматикой:
-TAuxDicArticle "Ситуация_9"
-{
-    key = { "tomita:Situation_ninth.cxx" type=CUSTOM }
-}
-
-
-
-
-
-

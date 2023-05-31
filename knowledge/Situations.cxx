@@ -23,42 +23,111 @@ AgeNum -> AnyWord<wff=/[1-9]?[0-9]-?((ый)|(ть)|(ой))?/>;
 
 Age -> AgeNum AgeW;
 
-//1
+//квадрокоптер
+kvadro -> 'квадрокоптер';
+//съёмка
+Video -> 'видео'|'съёмка'|'фотография'|'фото';
+VideoV -> 'снимать'|'фотографировать'|'поснимать'| 'пофотографировать'; Picture -> Prep Video|Verb Video|VideoV Noun|Verb VideoV;
+//штраф
+Fine -> 'штраф';
+FineVerb -> 'штрафовать'|'оштрафовать'|'заплатить';
+//размер штрафа
+Count -> AnyWord<wff=/[1-9]?[0-9]?[0-9]/>;
+Currency -> 'иена';
+CountZn -> Count Currency;
+CountZnach -> Prep CountZn;
+PP -> Verb Fine;
+PP -> FineVerb CountZn;
+PP -> FineVerb;
+PP -> Verb CountZnach;
+PP -> Verb CountZn;
+MM-> Prep kvadro | Verb kvadro | kvadro;
 
-S -> Age interp(Situation_first.Age) AnyWord* WeightZn interp(Situation_first.Ves) AnyWord* PolName interp (Situation_first.Pol) AnyWord* med interp(Situation_first.Med);
-S -> Age interp(Situation_first.Age) AnyWord* WeightZn interp(Situation_first.Ves) AnyWord* med interp(Situation_first.Med) AnyWord* PolName interp (Situation_first.Pol);
-S -> Age interp(Situation_first.Age) AnyWord* med interp(Situation_first.Med) AnyWord*  WeightZn interp(Situation_first.Ves) AnyWord* PolName interp (Situation_first.Pol);
-S -> Age interp(Situation_first.Age) AnyWord* med interp(Situation_first.Med) AnyWord* PolName interp (Situation_first.Pol)  AnyWord* WeightZn interp(Situation_first.Ves);
-S -> Age interp(Situation_first.Age) AnyWord* PolName interp (Situation_first.Pol) AnyWord* med interp(Situation_first.Med) AnyWord*  WeightZn interp(Situation_first.Ves) ;
-S -> Age interp(Situation_first.Age) AnyWord* PolName interp (Situation_first.Pol) AnyWord* WeightZn interp(Situation_first.Ves)  AnyWord*  med interp(Situation_first.Med);
+//местонахождение
+locationWord -> 'кафе'|'кинотеатр'|'метро'|'спортзал'|'площадь'|'парк'|'ресторан'|'библиотека'|'магазин'|'супермарк ет'|'автобус'|'музей'|'галлерея'|'выставка'|'столовая'|'кофейня'|'суши-бар'|'работа';
+location -> Prep locationWord;
+//действие - культура поведения
+actionVerb-> 'сморкаться'|'высморкаться';
+actionWord -> 'платок'|'салфетка'|'насморк';
+action -> Verb actionVerb|Verb actionWord| actionVerb Prep actionWord| actionVerb; //реакция окружающих
+reactionWord -> 'смотреть'|'шептаться'|'ругаться'|'кричать'|'закричать'|'накричать'|'замечание' | 'выгнать';
+reaction -> Verb reactionWord|Adv reactionWord|reactionWord;
 
-//2
-S -> WeightZn interp(Situation_first.Ves) AnyWord* Age interp(Situation_first.Age)  AnyWord* PolName interp (Situation_first.Pol) AnyWord* med interp(Situation_first.Med);
-S -> WeightZn interp(Situation_first.Ves) AnyWord* Age interp(Situation_first.Age) AnyWord* med interp(Situation_first.Med) AnyWord* PolName interp (Situation_first.Pol);
-S ->  med interp(Situation_first.Med) AnyWord* Age interp(Situation_first.Age) AnyWord* WeightZn interp(Situation_first.Ves) AnyWord* PolName interp (Situation_first.Pol);
-S -> med interp(Situation_first.Med) AnyWord* Age interp(Situation_first.Age) AnyWord* PolName interp (Situation_first.Pol)  AnyWord* WeightZn interp(Situation_first.Ves);
-S ->  PolName interp (Situation_first.Pol) AnyWord* Age interp(Situation_first.Age) AnyWord* med interp(Situation_first.Med) AnyWord*  WeightZn interp(Situation_first.Ves) ;
-S -> PolName interp (Situation_first.Pol) AnyWord* Age interp(Situation_first.Age) AnyWord* WeightZn interp(Situation_first.Ves)  AnyWord*  med interp(Situation_first.Med);
+//мусор
+garbageWord -> 'сор'|'мусор'|'отходы';
+garbageVerb -> 'выкинуть'|'выбросить'|'утилизировать';
+garbage -> garbageVerb garbageWord| garbageVerb Noun| garbageWord; //место для выброса мусора
+urnNegative -> 'не';
+urnVerbNegative -> 'нет'|'отсутствовать'|urnNegative Verb;
+urnWord -> 'бак'|'урна'|'контейнер';
+urn -> urnVerbNegative urnWord|urnVerbNegative urnWord Prep garbageWord|
+urnVerbNegative Adj urnWord| urnWord urnVerbNegative|urnWord Prep garbageWord urnVerbNegative| Adj urnWord urnVerbNegative|Adj urnWord| urnWord;
 
-//3
+//чаевые
+Count -> AnyWord<wff=/[1-9]?[0-9]?[0-9]/>;
+moneyWord -> 'деньги'|'чаевые'|'иена'|'чай';
+tipsWord -> 'положить'|'оставить'|'дать';
+tips -> tipsWord moneyWord| tipsWord Count moneyWord|tipsWord Prep moneyWord; //заслуга заведения
+foodActionAdj -> 'хороший'|'вкусный'|'быстрый';
+foodActionWord -> 'еда'|'обслуживание'|'атмосфера';
+foodAction -> foodActionAdj foodActionWord| Adj foodActionWord| foodActionAdj Noun;
 
-S -> WeightZn interp(Situation_first.Ves) AnyWord* PolName interp (Situation_first.Pol) AnyWord* Age interp(Situation_first.Age) AnyWord* med interp(Situation_first.Med);
-S -> WeightZn interp(Situation_first.Ves) AnyWord* med interp(Situation_first.Med) AnyWord* Age interp(Situation_first.Age) AnyWord* PolName interp (Situation_first.Pol);
-S -> med interp(Situation_first.Med) AnyWord*  WeightZn interp(Situation_first.Ves) AnyWord* Age interp(Situation_first.Age) AnyWord* PolName interp (Situation_first.Pol);
-S -> med interp(Situation_first.Med) AnyWord* PolName interp (Situation_first.Pol)  AnyWord* Age interp(Situation_first.Age) AnyWord* WeightZn interp(Situation_first.Ves);
-S -> PolName interp (Situation_first.Pol) AnyWord* med interp(Situation_first.Med) AnyWord*  Age interp(Situation_first.Age) AnyWord* WeightZn interp(Situation_first.Ves) ;
-S -> PolName interp (Situation_first.Pol) AnyWord* WeightZn interp(Situation_first.Ves)  AnyWord*  Age interp(Situation_first.Age) AnyWord* med interp(Situation_first.Med);
+//наличе татуировки
+tattooVerb -> 'изобразить'|'изображать'|'набить'|'наколоть';
+tattoo -> 'тату'|'татуировка'| tattooVerb Noun;
 
+//действие
+getNameActionWord -> 'имя';
+getNameActionVerb -> 'назвать'|'звать';
+getNameActionVerbName -> 'дать';
+getNameAction -> getNameActionVerbName getNameActionWord|getNameActionWord|getNameActionVerb; //родство
+kinship ->
+'сын'|'дочь'|'малыш'|'племянник'|'племянница'|'сестра'|'брат'|'ребёнок'|'дочка'|'сынок'; //Имя
+name -> AnyWord<gram="имя">;
 
-//4
-S -> WeightZn interp(Situation_first.Ves) AnyWord* PolName interp (Situation_first.Pol) AnyWord* med interp(Situation_first.Med)AnyWord* Age interp(Situation_first.Age);
-S -> WeightZn interp(Situation_first.Ves) AnyWord* med interp(Situation_first.Med) AnyWord* PolName interp (Situation_first.Pol) AnyWord* Age interp(Situation_first.Age);
-S -> med interp(Situation_first.Med) AnyWord*  WeightZn interp(Situation_first.Ves) AnyWord* PolName interp (Situation_first.Pol) AnyWord* Age interp(Situation_first.Age);
-S -> med interp(Situation_first.Med) AnyWord* PolName interp (Situation_first.Pol)  AnyWord* WeightZn interp(Situation_first.Ves)AnyWord* Age interp(Situation_first.Age);
-S -> PolName interp (Situation_first.Pol) AnyWord* med interp(Situation_first.Med) AnyWord*  WeightZn interp(Situation_first.Ves) AnyWord* Age interp(Situation_first.Age);
-S -> PolName interp (Situation_first.Pol) AnyWord* WeightZn interp(Situation_first.Ves)  AnyWord*  med interp(Situation_first.Med) AnyWord* Age interp(Situation_first.Age);
+// личное пространство
+PersonalSpaceVerb -> 'слушать'|'говорить'|'трогать'|'толкать'|'лезть'|'ругаться'|'скандалить'|'спорить'|'целоваться';
+PersonalSpace -> PersonalSpaceVerb Prep Noun|Adv PersonalSpaceVerb| PersonalSpaceVerb Noun| PersonalSpaceVerb;
 
+//действия с палочками
+rice -> 'рис';
+ChopsticksFoodActionWord -> 'палочка';
+ChopsticksFoodAction -> Verb ChopsticksFoodActionWord Prep rice|Verb Noun Prep ChopsticksFoodActionWord|Verb Prep ChopsticksFoodActionWord Noun|Verb ChopsticksFoodActionWord;
 
+// 1
+S -> Age+ interp(Situation_first.Age);
+S -> WeightZn+ interp(Situation_first.Ves);
+S -> PolName+ interp(Situation_first.Pol);
+S -> med+ interp(Situation_first.Med);
 
+// 2
+S -> Picture+ interp(Situation_first.Pictures);
+S -> MM+ interp(Situation_first.Kvadrocopter);
+S -> PP+ interp (Situation_first.Fines);
 
+// 3
+S -> reaction+ interp (Situation_first.Reaction);
+S -> action+ interp (Situation_first.CultureAction);
+S -> location+ interp (Situation_first.Location);
 
+// 4
+S -> garbage+ interp (Situation_first.Garbage);
+S -> urn+ interp (Situation_first.Urn);
+
+// 5
+S -> tips+ interp (Situation_first.Tips);
+S -> foodAction+ interp (Situation_first.FoodAction);
+
+// 6
+S -> tattoo+ interp (Situation_first.Tattoo);
+
+// 7
+S -> name+ interp (Situation_first.Name);
+S -> getNameAction+ interp (Situation_first.getNameAction);
+S -> kinship+ interp (Situation_first.Kinship);
+
+// 8
+S -> PersonalSpace+ interp (Situation_first.PersonalSpace);
+
+// 9
+S -> ChopsticksFoodAction+ interp (Situation_first.ChopsticksFoodAction);

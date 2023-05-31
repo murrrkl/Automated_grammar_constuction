@@ -5,12 +5,28 @@
     </div>
 </header>
 
+<div style = "display: flex; flex-wrap:wrap; justify-content: center; align-items: center; padding-top: 50px;">
+    <div class = "step done">1</div>
+    <div class = "line"></div>
+    <div class = "step">2</div>
+    <div class = "line"></div>
+    <div class = "step">3</div>
+    <div class = "line"></div>
+    <div class = "step">4</div>
+
+</div>
+
 <style>
 
     * {
 
         margin: 0;
         padding:0;
+    }
+
+    @font-face {
+        font-family: "Evolventa-Regular";
+        src: url(fonts/Evolventa-Regular.otf);
     }
 
     .header{
@@ -27,6 +43,31 @@
         text-decoration: none;
         transition: 0.3s;
         letter-spacing: 2px;
+    }
+
+    .step {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 1px solid MediumPurple;
+        font-family: "Evolventa-Regular";
+        text-align: center;
+        color: white;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 18px;
+    }
+
+    .done {
+        background-color: #8436bf9d;
+    }
+
+    .line {
+        width: 100px;
+        height: 3px;
+        background-color: MediumPurple;
     }
 
     .menu:hover {
@@ -61,6 +102,7 @@ if (!empty($_POST)) {
         $description = $_POST['description'];
         $sql = $conn->prepare("INSERT INTO mySituations(`name`, `description`) VALUES (?, ?);");
         $dbg = $sql->execute([$name, $description]);
+        header("Location: LoadExample.php");
     }
 }
 
@@ -81,11 +123,6 @@ if (!empty($_POST)) {
 </body>
 
 <style>
-    @font-face {
-        font-family: "Evolventa-Regular";
-        src: url(fonts/Evolventa-Regular.otf);
-    }
-
     body {
         font-family: "Evolventa-Regular";
         background-color: Lavender;
@@ -125,6 +162,4 @@ if (!empty($_POST)) {
         font-size: 18px;
         font-family: "Evolventa-Regular";
     }
-
-
 </style>
