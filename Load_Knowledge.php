@@ -57,6 +57,7 @@ if (isset($_POST['upload_btn'])) {
             <input id = "input_fact" type="file"  name="fact">
             <button id ="input_button_fact" onclick="document.getElementById('input_fact').click()" type="button">Выберите файл</button>
             <button id = "load" name = "upload_btn" type="submit">Загрузить</button>
+            <button id = "download" name = "download_btn" type="submit">Скачать</button>
         </div>
 
     </center>
@@ -129,6 +130,11 @@ if (isset($_POST['upload_btn'])) {
         letter-spacing: 2px;
         font-size: 14px;
         color: black;
+    }
+
+    #download {
+        background-color: SlateBlue;
+        color: white;
     }
 
     #input_gramma {

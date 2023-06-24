@@ -125,10 +125,12 @@ if (isset($_POST['generate'])) {
     $optional = array(); // необязательные поля фактов
 
 
+    // Наполнение массива распознанными фактами и их подсчёт
     for ($i = 0; $i < count($lines); $i++) {
         $str = $lines[$i];
         if (strpos($str, '=') !== false) {
             $result = substr($str, 0, strpos($str, '=') - 1);
+            $result = trim($result);
             if (!in_array($result, $stack)) {
                 array_push($stack, $result);
                 array_push($countFact, 1);
@@ -137,19 +139,20 @@ if (isset($_POST['generate'])) {
                 $countFact[$key]++;
             }
         }
-
     }
 
     $max = max($countFact); // Максимальное кол-во встречаемых полей фактов одного типа
 
+    // Распределение найденных фактов по категориям - обязательные и  необязательные
     for ($j = 0; $j < count($countFact); $j++) {
         if ($countFact[$j] >= $max * 0.8) {
             array_push( $required, $stack[$j]);
-        } else {
+        } else if ($countFact[$j] >= $max * 0.2){
             array_push( $optional, $stack[$j]);
         }
     }
 
+    // Вывод групп на экран для тестирования
     if (count($required) > 0) {
         echo '<center><h1>Обязательные поля фактов: </h1> </center>';
         for ($j = 0; $j < count($required); $j++) {
@@ -163,5 +166,48 @@ if (isset($_POST['generate'])) {
             echo '<center><div class = "facts">' . $optional [$j] . '</div> </center>';
         }
     }
+
+    $myFile = "knowledge/Situations.cxx";
+    $lines = file($myFile); //file in to an array
+
+
+    file_put_contents('knowledge/test.cxx', '');
+
+    $grammaName = ""; // Имя грамматики
+    // Открываем файл для получения существующего содержимого
+    $grammaFile = "knowledge/test.cxx";
+    $current = file_get_contents($grammaFile);
+
+    $current .= '#encoding "utf-8"';
+    $current .= "\n";
+    $current .= "#GRAMMAR_ROOT S\n";
+    $current .= "\n";
+
+    $flag = false;
+
+    for ($i = 0; $i < count($lines); $i++) {
+        $str = $lines[$i];
+
+        if ((strpos($str, '// End') !== false) && ($flag === true)) {
+            $flag = false;
+            $current .= "\n";
+        }
+
+        if ($flag === true) {
+            $current .= $str;
+        }
+
+        if (strpos($str, '// Start') !== false) {
+            $result = substr($str, 9, -1);
+            $result = trim($result); // Удаляем лишние пробелы и знаки табуляции
+            if ((in_array($result, $required)) || (in_array($result, $optional))) {
+                $flag = true;
+            }
+        }
+    }
+
+    file_put_contents($grammaFile, $current); // Вносим полученные данные в файл
+
+
 }
 ?>

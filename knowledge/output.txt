@@ -1,7 +1,7 @@
 Я женщина 60 лет , моя талия составляет 92 см и меня по каким-то причинам отправили на лечение . 
 	Situation_first
 	{
-		Pol = женский
+		PolName = женский
 	}
 	Situation_first
 	{
@@ -9,54 +9,54 @@
 	}
 	Situation_first
 	{
-		Ves = составлять 92 см
+		WeightZn = составлять 92 см
 	}
 	Situation_first
 	{
-		Med = отправить на лечение
+		med = отправить на лечение
 	}
-Мой вес 90 кг , почему-то меня направили к врачу мне 31 год я мужчина . 
+Я мужчина , мой вес 90 кг и мне 21 год , почему-то меня направили к врачу . 
 	Situation_first
 	{
-		Ves = мой вес 90 кг
-	}
-	Situation_first
-	{
-		Med = направить к врачу
+		PolName = мужской
 	}
 	Situation_first
 	{
-		Age = 31 год
+		WeightZn = мой вес 90 кг
 	}
 	Situation_first
 	{
-		Pol = мужской
-	}
-Мой вес 70 кг , пол муж почему-то меня направили к врачу мой возраст 20 лет . 
-	Situation_first
-	{
-		Ves = мой вес 70 кг
+		Age = 21 год
 	}
 	Situation_first
 	{
-		Pol = мужской
+		med = направить к врачу
+	}
+Мне 22 года и мой вес 100 кг , пол м почему-то меня направили к врачу . 
+	Situation_first
+	{
+		Age = 22 года
 	}
 	Situation_first
 	{
-		Med = направить к врачу
+		WeightZn = мой вес 100 кг
 	}
 	Situation_first
 	{
-		Age = 20 лет
-	}
-Мой вес 70 кг , пол мужчина и мне 19 лет почему-то меня направили к врачу . 
-	Situation_first
-	{
-		Ves = мой вес 70 кг
+		PolName = мужской
 	}
 	Situation_first
 	{
-		Pol = мужской
+		med = направить к врачу
+	}
+Мой вес 70 кг , пол м и мне 19 лет почему-то меня направили к врачу . 
+	Situation_first
+	{
+		WeightZn = мой вес 70 кг
+	}
+	Situation_first
+	{
+		PolName = мужской
 	}
 	Situation_first
 	{
@@ -64,5 +64,5 @@
 	}
 	Situation_first
 	{
-		Med = направить к врачу
+		med = направить к врачу
 	}
