@@ -111,6 +111,27 @@
 </style>
 
 <?php
+$fileName = "";
+
+$username = 'root';
+$pass = '12345678K';
+$db = 'Situations';
+
+try {
+    // подключаемся к серверу
+    $conn = new PDO("mysql:host=localhost; charset=utf8; dbname=$db", $username, $pass);
+    //echo "Database connection established";
+}
+catch (PDOException $e) {
+    echo "Connection failed: " . $e->getMessage();
+}
+
+$res = $conn->query("SELECT name, description FROM mySituations");
+
+foreach($res as $row){
+    $fileName = $row["name"]; // Получаем имя последней добавленной в БД грамматики
+}
+
 if (isset($_POST['generate'])) {
     // Получение выходного файла
     $last_line = system('docker run --rm -v /var/www/html/knowledge:/mnt nlpub/tomita bash /mnt/auto.sh', $retval);
@@ -170,12 +191,9 @@ if (isset($_POST['generate'])) {
     $myFile = "knowledge/Situations.cxx";
     $lines = file($myFile); //file in to an array
 
+    $grammaFile =  __DIR__ . '/knowledge/' . $fileName. ".cxx";
 
-    file_put_contents('knowledge/test.cxx', '');
-
-    $grammaName = ""; // Имя грамматики
-    // Открываем файл для получения существующего содержимого
-    $grammaFile = "knowledge/test.cxx";
+    file_put_contents($grammaFile, '');
     $current = file_get_contents($grammaFile);
 
     $current .= '#encoding "utf-8"';

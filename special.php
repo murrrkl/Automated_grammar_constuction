@@ -15,6 +15,9 @@
     <a class="btn" href="Load_Knowledge.php">
         Загрузить архив грамматик
     </a>
+    <a class="btn" href="Unrecognized.php">
+        Нераспознанные ситуации
+    </a>
 
     <div>
 </body>

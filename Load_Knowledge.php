@@ -38,6 +38,41 @@ if (isset($_POST['upload_btn'])) {
     }
 
 }
+
+if (isset($_POST['download_btn'])) {
+    $zip = new ZipArchive;
+    if ($zip->open('new.zip', ZipArchive::CREATE) === TRUE)
+    {
+        // Add random.txt file to zip and rename it to newfile.txt
+        $zip->addFile(__DIR__ . '/knowledge/' . "Facts.proto", 'Facts.proto');
+        $zip->addFile(__DIR__ . '/knowledge/' . "Situations.cxx", 'Situations.cxx');
+
+        // All files are added, so close the zip file.
+        $zip->close();
+    }
+
+    $filename = "new.zip";
+    //Check the file exists or not
+    if (file_exists($filename)) {
+
+        //Define header information
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/octet-stream');
+        header("Cache-Control: no-cache, must-revalidate");
+        header("Expires: 0");
+        header('Content-Disposition: attachment; filename="' . basename($filename) . '"');
+        header('Content-Length: ' . filesize($filename));
+        header('Pragma: public');
+
+        flush();
+
+        readfile($filename);
+
+        die();
+    }
+}
+
+
 ?>
 
 <header>

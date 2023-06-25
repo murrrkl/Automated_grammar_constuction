@@ -103,16 +103,16 @@ if(isset($_POST['submit'])) {
         $myFile = "tomita/output.txt";
         $lines = file($myFile);//file in to an array
 
+        $host = '127.0.0.1';
+        $username = 'root';
+        $pass = '12345678K';
+        $db = 'Situations';
+
+        $conn = new PDO("mysql:host=localhost; charset=utf8; dbname=$db", $username, $pass);
+
         if (count($lines) > 1) {
             $mySituation = $lines[1];
             $mySituation = substr($mySituation,1,-1);
-
-            $host = '127.0.0.1';
-            $username = 'root';
-            $pass = '12345678K';
-            $db = 'Situations';
-            $conn = new PDO("mysql:host=localhost; charset=utf8; dbname=$db", $username, $pass);
-
 
             // Поиск по БД
             $sth = $conn->prepare("SELECT * FROM `mySituations` WHERE `name` = :name");
@@ -123,6 +123,8 @@ if(isset($_POST['submit'])) {
             echo '<center><div id="answer">' . $description . '</div> </center>';
 
         } else {
+            $sql = $conn->prepare("INSERT INTO Unrecognized(`description`) VALUES (?);");
+            $dbg = $sql->execute([$a]);
             echo '<script>alert("Ситуация не распознана!")</script>';
         }
 
