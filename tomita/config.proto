@@ -14,14 +14,6 @@ Format = text;
 }
 
 Articles = [
-  { Name = "Ситуация_1" }
-]
-
-Facts = [
-{Name = "Situation_first"}
-]
-
-Articles = [
   { Name = "Ситуация_2" }
 ]
 
@@ -83,5 +75,14 @@ Articles = [
 
 Facts = [
 {Name = "Situation_ninth"}
+]
+}
+
+Articles = [
+  { Name = "Situation_first" }
+]
+
+Facts = [
+  { Name = "Situation_first" }
 ]
 }

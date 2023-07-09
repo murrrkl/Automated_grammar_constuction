@@ -9,13 +9,6 @@ import "fact_types.proto";
 import "kwtypes.proto";
 import "pol.gzt";
 
-
-// статья с нашей грамматикой:
-TAuxDicArticle "Ситуация_1"
-{
-    key = { "tomita:Situation_first.cxx" type=CUSTOM }
-}
-
 // статья с нашей грамматикой:
 TAuxDicArticle "Ситуация_2"
 {
@@ -64,8 +57,7 @@ TAuxDicArticle "Ситуация_9"
     key = { "tomita:Situation_ninth.cxx" type=CUSTOM }
 }
 
-
-
-
-
-
+TAuxDicArticle "Situation_first"
+{
+    key = { "tomita:Situation_first.cxx type=CUSTOM }
+}

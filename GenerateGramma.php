@@ -117,6 +117,25 @@ $username = 'root';
 $pass = '12345678K';
 $db = 'Situations';
 
+// Вариативность местонахождения полей фактов в тексте
+function pc_permute($items, &$current, $fileName, $perms = array()) {
+    if (empty($items)) {
+        $current .=  "S -> ";
+        for ($j = 0; $j < count($perms); $j++) {
+            $current .= $perms[$j] . " interp(" . $fileName . "." . $perms[$j] . ") AnyWord* ";
+        }
+        $current .= ";\n";
+    } else {
+        for ($i = count($items) - 1; $i >= 0; --$i) {
+            $newitems = $items;
+            $newperms = $perms;
+            list($foo) = array_splice($newitems, $i, 1);
+            array_unshift($newperms, $foo);
+            pc_permute($newitems, $current, $fileName, $newperms);
+        }
+    }
+}
+
 try {
     // подключаемся к серверу
     $conn = new PDO("mysql:host=localhost; charset=utf8; dbname=$db", $username, $pass);
@@ -174,6 +193,7 @@ if (isset($_POST['generate'])) {
     }
 
     // Вывод групп на экран для тестирования
+    /*
     if (count($required) > 0) {
         echo '<center><h1>Обязательные поля фактов: </h1> </center>';
         for ($j = 0; $j < count($required); $j++) {
@@ -186,12 +206,12 @@ if (isset($_POST['generate'])) {
         for ($j = 0; $j < count($optional); $j++) {
             echo '<center><div class = "facts">' . $optional [$j] . '</div> </center>';
         }
-    }
+    }*/
 
     $myFile = "knowledge/Situations.cxx";
     $lines = file($myFile); //file in to an array
 
-    $grammaFile =  __DIR__ . '/knowledge/' . $fileName. ".cxx";
+    $grammaFile =  __DIR__ . '/tomita/' . $fileName. ".cxx";
 
     file_put_contents($grammaFile, '');
     $current = file_get_contents($grammaFile);
@@ -202,6 +222,9 @@ if (isset($_POST['generate'])) {
     $current .= "\n";
 
     $flag = false;
+
+    $full_facts =  array_merge($optional,  $required);
+
 
     for ($i = 0; $i < count($lines); $i++) {
         $str = $lines[$i];
@@ -215,17 +238,73 @@ if (isset($_POST['generate'])) {
             $current .= $str;
         }
 
+        // Переносим нужные фрагментв грамматик в новую грамматику
         if (strpos($str, '// Start') !== false) {
             $result = substr($str, 9, -1);
             $result = trim($result); // Удаляем лишние пробелы и знаки табуляции
-            if ((in_array($result, $required)) || (in_array($result, $optional))) {
+            if (in_array($result, $full_facts)) {
                 $flag = true;
             }
         }
     }
 
-    file_put_contents($grammaFile, $current); // Вносим полученные данные в файл
 
+
+    pc_permute($full_facts, $current, $fileName); // Получение вариантов местонахождения в тексте
+    file_put_contents($grammaFile, $current); // Вносим полученные данные в файл с новой грамматикой
+
+    // Внесение данных в файл с фактами и описанием полей фактов
+    $count = 1;
+    $factsFile =  __DIR__ . "/tomita/fact_types.proto";
+
+    $current = file_get_contents($factsFile);
+    $current .= "\n";
+    $current .= "message " . $fileName . ":NFactType.TFact \n";
+    $current .= "{\n";
+    // Обязательные поля
+     for ($j = 0; $j < count($required); $j++) {
+         $current .= "    required string " . $required[$j] . " = " . $count . ";\n";
+         $count += 1;
+     }
+
+     // Необязательные поля
+     for ($j = 0; $j < count($optional); $j++) {
+         $current .= "    required string " . $optional[$j] . " = " . $count . ";\n";
+         $count += 1;
+     }
+
+    $current .= "}\n";
+
+    file_put_contents($factsFile, $current); // Вносим полученные данные в файл с описанием фактов
+
+    // Внесение данных в корневой словарь
+    $count = 1;
+    $factsFile =  __DIR__ . "/tomita/mydic.gzt";
+
+    $current = file_get_contents($factsFile);
+    $current .= "\n";
+    $current .= 'TAuxDicArticle "' . $fileName . '"';
+    $current .= "\n{\n";
+    $current .= '    key = { "tomita:' . $fileName . '.cxx type=CUSTOM }';
+    $current .= "\n}\n";
+
+    file_put_contents($factsFile, $current); // Вносим полученные данные в корневой словарь
+
+    // Внесение данных в конфигурационный файл
+    $count = 1;
+    $configFile =  __DIR__ . "/tomita/config.proto";
+
+    $current = file_get_contents($configFile);
+    $current = substr_replace( $current ,"",-1);
+    $current .= "\n\nArticles = [\n";
+    $current .= '  { Name = "' . $fileName . '" }';
+    $current .= "\n]\n\n";
+    $current .= "Facts = [\n";
+    $current .= '  { Name = "' . $fileName . '" }';
+    $current .= "\n]";
+    $current .= "\n}";
+
+    file_put_contents($configFile, $current); // Вносим полученные данные в конфигурационный файл
 
 }
 ?>
