@@ -1,6 +1,8 @@
 import "base.proto";
 import "facttypes_base.proto";
 
+
+
 message Situation_second:NFactType.TFact
 {
     required string Fines = 1;
@@ -58,6 +60,8 @@ message Situation_ninth:NFactType.TFact
     required string Action = 1;
     required string Reaction = 2;
 }
+
+
 
 message Situation_first:NFactType.TFact 
 {

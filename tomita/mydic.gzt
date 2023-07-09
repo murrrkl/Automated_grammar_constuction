@@ -56,7 +56,6 @@ TAuxDicArticle "Ситуация_9"
 {
     key = { "tomita:Situation_ninth.cxx" type=CUSTOM }
 }
-
 TAuxDicArticle "Situation_first"
 {
     key = { "tomita:Situation_first.cxx type=CUSTOM }
