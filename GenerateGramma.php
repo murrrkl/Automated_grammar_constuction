@@ -278,7 +278,6 @@ if (isset($_POST['generate'])) {
     file_put_contents($factsFile, $current); // Вносим полученные данные в файл с описанием фактов
 
     // Внесение данных в корневой словарь
-    $count = 1;
     $factsFile =  __DIR__ . "/tomita/mydic.gzt";
 
     $current = file_get_contents($factsFile);
@@ -291,7 +290,6 @@ if (isset($_POST['generate'])) {
     file_put_contents($factsFile, $current); // Вносим полученные данные в корневой словарь
 
     // Внесение данных в конфигурационный файл
-    $count = 1;
     $configFile =  __DIR__ . "/tomita/config.proto";
 
     $current = file_get_contents($configFile);
@@ -306,5 +304,6 @@ if (isset($_POST['generate'])) {
 
     file_put_contents($configFile, $current); // Вносим полученные данные в конфигурационный файл
 
+    header("Location: Done.php"); // Переход к 4 шагу
 }
 ?>

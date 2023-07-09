@@ -32,6 +32,7 @@
         color: purple;
         cursor: pointer;
     }
+
 </style>
 
 <?php
@@ -66,17 +67,69 @@ echo "</table> </div> </div>";
 
 if(isset($_POST["name"]))
 {
-    try {
+
         $sql = "DELETE FROM mySituations WHERE name = :username";
         $stmt = $conn->prepare($sql);
         $stmt->bindValue(":username", $_POST["name"]);
         $stmt->execute();
-        // Добавить удаление грамматики с данным названием
+
+        // Удаление грамматики с данным названием и информации о ней
+        $name = $_POST['name'];
+
+        $grammaFile =  __DIR__ . '/tomita/' . $name. ".cxx";
+        unlink($grammaFile); // Удаление грамматики
+
+        // Удаление информации из конфигурационного файла
+        $configFile =  __DIR__ . "/tomita/config.proto";
+        $current = file_get_contents($configFile);
+
+        $currentx = "\n\nArticles = [\n";
+        $currentx .= '  { Name = "' . $name . '" }';
+        $currentx .= "\n]\n\n";
+        $currentx .= "Facts = [\n";
+        $currentx .= '  { Name = "' . $name . '" }';
+        $currentx .= "\n]";
+
+        $current = str_replace($currentx, "", $current); // Удаление фрагмента
+
+        file_put_contents($configFile, $current); // Вносим полученные данные в конфигурационный файл
         header("Location: SituationsReview.php");
-    }
-    catch (PDOException $e) {
-        echo "Database error: " . $e->getMessage();
-    }
+
+        // Удаление информации из корневого словаря
+        $factsFile =  __DIR__ . "/tomita/mydic.gzt";
+
+        $current = file_get_contents($factsFile);
+        $currentx = "\n";
+        $currentx .= 'TAuxDicArticle "' . $name . '"';
+        $currentx .= "\n{\n";
+        $currentx .= '    key = { "tomita:' . $name . '.cxx type=CUSTOM }';
+        $currentx .= "\n}\n";
+
+        $current = str_replace($currentx, "", $current); // Удаление фрагмента
+
+        file_put_contents($factsFile, $current); // Вносим полученные данные в корневой словарь
+
+        // Удаление информации из файла с описанием файлов
+        $factsFile =  __DIR__ . "/tomita/fact_types.proto";
+        $lines = file($factsFile); //file in to an array
+        file_put_contents($factsFile, '');
+
+        $flag = false;
+        $current = "";
+
+        for ($i = 0; $i < count($lines); $i++) {
+            $str = $lines[$i];
+            if (strpos($str, $name) !== false) {
+                $flag = true;
+            }
+            if ($flag === false) {
+                $current .= $str;
+            } else if (strpos($str, "}") !== false) {
+                $flag = false;
+            }
+        }
+
+        file_put_contents($factsFile, $current); // Вносим полученные данные в корневой словарь в файл с описанием фактов
 }
 ?>
 
