@@ -98,6 +98,14 @@ if (!empty($_POST)) {
     } else if (trim($_POST['description'] === '')) {
         echo "<script>alert('Описание ситуации не может быть пустым!');</script>";
     } else {
+        $sql = "SELECT COUNT(*) FROM mySituations WHERE name != ''";
+        $res = $conn->query($sql);
+        $count = $res->fetchColumn();
+
+        for ($i = 1; $i <= $count; $i++) {
+            array_map('unlink', glob("tomita/*.bin"));
+        }
+
         $name = $_POST['name'];
         $description = $_POST['description'];
         $sql = $conn->prepare("INSERT INTO mySituations(`name`, `description`) VALUES (?, ?);");

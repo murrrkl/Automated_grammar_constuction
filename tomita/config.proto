@@ -14,30 +14,6 @@ Format = text;
 }
 
 Articles = [
-  { Name = "Ситуация_2" }
-]
-
-Facts = [
-{Name = "Situation_second"}
-]
-
-Articles = [
-  { Name = "Ситуация_3" }
-]
-
-Facts = [
-{Name = "Situation_third"}
-]
-
-Articles = [
-  { Name = "Ситуация_4" }
-]
-
-Facts = [
-{Name = "Situation_fourth"}
-]
-
-Articles = [
   { Name = "Ситуация_5" }
 ]
 
@@ -45,37 +21,8 @@ Facts = [
 {Name = "Situation_fifth"}
 ]
 
-Articles = [
-  { Name = "Ситуация_6" }
-]
 
-Facts = [
-{Name = "Situation_sixth"}
-]
 
-Articles = [
-  { Name = "Ситуация_7" }
-]
-
-Facts = [
-{Name = "Situation_seventh"}
-]
-
-Articles = [
-  { Name = "Ситуация_8" }
-]
-
-Facts = [
-{Name = "Situation_eighth"}
-]
-
-Articles = [
-  { Name = "Ситуация_9" }
-]
-
-Facts = [
-{Name = "Situation_ninth"}
-]
 
 
 
@@ -87,5 +34,14 @@ Articles = [
 
 Facts = [
   { Name = "Situation_first" }
+]
+
+
+Articles = [
+  { Name = "Situation_second" }
+]
+
+Facts = [
+  { Name = "Situation_second" }
 ]
 }

@@ -3,28 +3,6 @@ import "facttypes_base.proto";
 
 
 
-message Situation_second:NFactType.TFact
-{
-    required string Fines = 1;
-    required string Kvadrocopter = 2;
-    //необязательное поле факта
-    optional string Pictures = 3;
-}
-
-message Situation_third:NFactType.TFact
-{
-    optional string Location = 1;
-    required string Action = 2;
-    required string Reaction = 3;
-}
-
-message Situation_fourth:NFactType.TFact
-{
-    optional string Location = 1;
-    required string Garbage = 2;
-    required string Urn = 3;
-}
-
 message Situation_fifth:NFactType.TFact
 {
     required string Location = 1;
@@ -33,40 +11,21 @@ message Situation_fifth:NFactType.TFact
     required string Reaction = 4;
 }
 
-message Situation_sixth:NFactType.TFact
-{
-    required string Location = 1;
-    required string Tattoo = 2;
-    required string Reaction = 3;
-}
 
-message Situation_seventh:NFactType.TFact
-{
-    required string Action = 1;
-    required string Kinship = 2;
-    required string Name = 3;
-    required string Result = 4;
-}
 
-message Situation_eighth:NFactType.TFact
-{
-    required string Action = 1;
-    required string Location = 2;
-    required string Reaction = 3;
-}
-
-message Situation_ninth:NFactType.TFact
-{
-    required string Action = 1;
-    required string Reaction = 2;
-}
 
 
 
 message Situation_first:NFactType.TFact 
 {
-    required string PolName = 1;
-    required string Age = 2;
-    required string WeightZn = 3;
-    required string med = 4;
+    required string WeightZn = 1;
+    required string med = 2;
+    required string PolName = 3;
+    required string Age = 4;
+}
+
+message Situation_second:NFactType.TFact 
+{
+    required string Picture = 1;
+    required string Fines = 2;
 }

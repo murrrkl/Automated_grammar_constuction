@@ -284,7 +284,7 @@ if (isset($_POST['generate'])) {
     $current .= "\n";
     $current .= 'TAuxDicArticle "' . $fileName . '"';
     $current .= "\n{\n";
-    $current .= '    key = { "tomita:' . $fileName . '.cxx type=CUSTOM }';
+    $current .= '    key = { "tomita:' . $fileName . '.cxx" type=CUSTOM }';
     $current .= "\n}\n";
 
     file_put_contents($factsFile, $current); // Вносим полученные данные в корневой словарь
@@ -303,6 +303,9 @@ if (isset($_POST['generate'])) {
     $current .= "\n}";
 
     file_put_contents($configFile, $current); // Вносим полученные данные в конфигурационный файл
+
+    $gzt =  __DIR__ . '/tomita/mydic.gzt.bin';
+    unlink($gzt); // Удаление бинарного  файла корневого словаря
 
     header("Location: Done.php"); // Переход к 4 шагу
 }

@@ -68,6 +68,7 @@ echo "</table> </div> </div>";
 if(isset($_POST["name"]))
 {
 
+
         $sql = "DELETE FROM mySituations WHERE name = :username";
         $stmt = $conn->prepare($sql);
         $stmt->bindValue(":username", $_POST["name"]);
@@ -78,6 +79,19 @@ if(isset($_POST["name"]))
 
         $grammaFile =  __DIR__ . '/tomita/' . $name. ".cxx";
         unlink($grammaFile); // Удаление грамматики
+        $grammabin =  __DIR__ . '/tomita/' . $name. ".bin";
+        unlink($grammabin); // Удаление бинарного файла грамматики
+        $gzt =  __DIR__ . '/tomita/mydic.gzt.bin';
+        unlink($gzt); // Удаление бинарного  файла корневого словаря
+
+        $sql = "SELECT COUNT(*) FROM mySituations WHERE name != ''";
+        $res = $conn->query($sql);
+        $count = $res->fetchColumn();
+
+        for ($i = 1; $i <= $count; $i++) {
+            array_map('unlink', glob("tomita/*.bin"));
+        }
+
 
         // Удаление информации из конфигурационного файла
         $configFile =  __DIR__ . "/tomita/config.proto";
@@ -102,7 +116,7 @@ if(isset($_POST["name"]))
         $currentx = "\n";
         $currentx .= 'TAuxDicArticle "' . $name . '"';
         $currentx .= "\n{\n";
-        $currentx .= '    key = { "tomita:' . $name . '.cxx type=CUSTOM }';
+        $currentx .= '    key = { "tomita:' . $name . '.cxx" type=CUSTOM }';
         $currentx .= "\n}\n";
 
         $current = str_replace($currentx, "", $current); // Удаление фрагмента
@@ -130,6 +144,7 @@ if(isset($_POST["name"]))
         }
 
         file_put_contents($factsFile, $current); // Вносим полученные данные в корневой словарь в файл с описанием фактов
+        header("Location: SituationsReview.php"); // Обновление страницы
 }
 ?>
 

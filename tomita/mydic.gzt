@@ -10,53 +10,18 @@ import "kwtypes.proto";
 import "pol.gzt";
 
 // статья с нашей грамматикой:
-TAuxDicArticle "Ситуация_2"
-{
-    key = { "tomita:Situation_second.cxx" type=CUSTOM }
-}
-
-// статья с нашей грамматикой:
-TAuxDicArticle "Ситуация_3"
-{
-    key = { "tomita:Situation_third.cxx" type=CUSTOM }
-}
-
-// статья с нашей грамматикой:
-TAuxDicArticle "Ситуация_4"
-{
-    key = { "tomita:Situation_fourth.cxx" type=CUSTOM }
-}
-
-// статья с нашей грамматикой:
 TAuxDicArticle "Ситуация_5"
 {
     key = { "tomita:Situation_fifth.cxx" type=CUSTOM }
 }
 
-// статья с нашей грамматикой:
-TAuxDicArticle "Ситуация_6"
-{
-    key = { "tomita:Situation_sixth.cxx" type=CUSTOM }
-}
 
-// статья с нашей грамматикой:
-TAuxDicArticle "Ситуация_7"
-{
-    key = { "tomita:Situation_seventh.cxx" type=CUSTOM }
-}
-
-// статья с нашей грамматикой:
-TAuxDicArticle "Ситуация_8"
-{
-    key = { "tomita:Situation_eighth.cxx" type=CUSTOM }
-}
-
-// статья с нашей грамматикой:
-TAuxDicArticle "Ситуация_9"
-{
-    key = { "tomita:Situation_ninth.cxx" type=CUSTOM }
-}
 TAuxDicArticle "Situation_first"
 {
-    key = { "tomita:Situation_first.cxx type=CUSTOM }
+    key = { "tomita:Situation_first.cxx" type=CUSTOM }
+}
+
+TAuxDicArticle "Situation_second"
+{
+    key = { "tomita:Situation_second.cxx" type=CUSTOM }
 }

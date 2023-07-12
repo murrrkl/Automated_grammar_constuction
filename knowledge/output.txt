@@ -1,68 +1,9 @@
-Я женщина 60 лет , моя талия составляет 92 см и меня по каким-то причинам отправили на лечение . 
+Я снимал видео для своего блога с квадрокоптера и меня оштрафовали на 100 йен . 
 	Situation_first
 	{
-		PolName = женский
+		Picture = снимать видео
 	}
 	Situation_first
 	{
-		Age = 60 лет
-	}
-	Situation_first
-	{
-		WeightZn = составлять 92 см
-	}
-	Situation_first
-	{
-		med = отправить на лечение
-	}
-Я мужчина , мой вес 90 кг и мне 21 год , почему-то меня направили к врачу . 
-	Situation_first
-	{
-		PolName = мужской
-	}
-	Situation_first
-	{
-		WeightZn = мой вес 90 кг
-	}
-	Situation_first
-	{
-		Age = 21 год
-	}
-	Situation_first
-	{
-		med = направить к врачу
-	}
-Мне 22 года и мой вес 100 кг , пол м почему-то меня направили к врачу . 
-	Situation_first
-	{
-		Age = 22 года
-	}
-	Situation_first
-	{
-		WeightZn = мой вес 100 кг
-	}
-	Situation_first
-	{
-		PolName = мужской
-	}
-	Situation_first
-	{
-		med = направить к врачу
-	}
-Мой вес 70 кг , пол м и мне 19 лет почему-то меня направили к врачу . 
-	Situation_first
-	{
-		WeightZn = мой вес 70 кг
-	}
-	Situation_first
-	{
-		PolName = мужской
-	}
-	Situation_first
-	{
-		Age = 19 лет
-	}
-	Situation_first
-	{
-		med = направить к врачу
+		Fines = оштрафовать
 	}
